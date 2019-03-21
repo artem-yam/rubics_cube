@@ -1,7 +1,7 @@
-package utils.checker;
+package situation.checker;
 
-import model.situation.CubeState;
-import model.situation.State;
+import situation.ClassicCubeState;
+import situation.State;
 
 public class CubeStateChecker extends StateChecker {
 
@@ -10,7 +10,7 @@ public class CubeStateChecker extends StateChecker {
     }
 
     public CubeStateChecker() {
-        super(new CubeState());
+        super(new ClassicCubeState());
     }
 
     @Override

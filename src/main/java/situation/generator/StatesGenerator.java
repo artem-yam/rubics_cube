@@ -1,7 +1,7 @@
-package utils.generator;
+package situation.generator;
 
-import model.action.Action;
-import model.situation.State;
+import action.Action;
+import situation.State;
 
 import java.util.List;
 

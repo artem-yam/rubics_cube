@@ -1,4 +1,4 @@
-package model.action;
+package action;
 
 public interface Action {
 }
