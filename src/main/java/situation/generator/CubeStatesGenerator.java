@@ -73,8 +73,8 @@ public class CubeStatesGenerator implements StatesGenerator {
                                     frontSideColors[2][2]},
                             {downSideColors[0][2], downSideColors[1][2],
                                     downSideColors[2][2]},
-                            {backSideColors[0][2], backSideColors[1][2],
-                                    backSideColors[2][2]}};
+                            {backSideColors[0][0], backSideColors[1][0],
+                                    backSideColors[2][0]}};
 
                     frontSideColors[0][2] = rotatingSideEdgeColors[2][0];
                     frontSideColors[1][2] = rotatingSideEdgeColors[2][1];
@@ -84,9 +84,9 @@ public class CubeStatesGenerator implements StatesGenerator {
                     downSideColors[1][2] = rotatingSideEdgeColors[3][1];
                     downSideColors[2][2] = rotatingSideEdgeColors[3][2];
 
-                    backSideColors[0][0] = rotatingSideEdgeColors[0][0];
+                    backSideColors[0][0] = rotatingSideEdgeColors[0][2];
                     backSideColors[1][0] = rotatingSideEdgeColors[0][1];
-                    backSideColors[2][0] = rotatingSideEdgeColors[0][2];
+                    backSideColors[2][0] = rotatingSideEdgeColors[0][0];
 
                     upSideColors[0][2] = rotatingSideEdgeColors[1][0];
                     upSideColors[1][2] = rotatingSideEdgeColors[1][1];
@@ -113,8 +113,8 @@ public class CubeStatesGenerator implements StatesGenerator {
                                     frontSideColors[2][2]},
                             {downSideColors[0][2], downSideColors[1][2],
                                     downSideColors[2][2]},
-                            {backSideColors[0][2], backSideColors[1][2],
-                                    backSideColors[2][2]}};
+                            {backSideColors[0][0], backSideColors[1][0],
+                                    backSideColors[2][0]}};
 
                     frontSideColors[0][2] = rotatingSideEdgeColors[0][0];
                     frontSideColors[1][2] = rotatingSideEdgeColors[0][1];
@@ -128,9 +128,9 @@ public class CubeStatesGenerator implements StatesGenerator {
                     backSideColors[1][0] = rotatingSideEdgeColors[2][1];
                     backSideColors[2][0] = rotatingSideEdgeColors[2][2];
 
-                    upSideColors[0][2] = rotatingSideEdgeColors[3][0];
+                    upSideColors[0][2] = rotatingSideEdgeColors[3][2];
                     upSideColors[1][2] = rotatingSideEdgeColors[3][1];
-                    upSideColors[2][2] = rotatingSideEdgeColors[3][2];
+                    upSideColors[2][2] = rotatingSideEdgeColors[3][0];
 
                     ((ClassicCubeState) newState).getSides().set(3,
                             sideAfterRotation);
@@ -153,8 +153,8 @@ public class CubeStatesGenerator implements StatesGenerator {
                                     frontSideColors[2][0]},
                             {downSideColors[0][0], downSideColors[1][0],
                                     downSideColors[2][0]},
-                            {backSideColors[0][0], backSideColors[1][0],
-                                    backSideColors[2][0]}};
+                            {backSideColors[0][2], backSideColors[1][2],
+                                    backSideColors[2][2]}};
 
                     frontSideColors[0][0] = rotatingSideEdgeColors[0][0];
                     frontSideColors[1][0] = rotatingSideEdgeColors[0][1];
@@ -168,9 +168,9 @@ public class CubeStatesGenerator implements StatesGenerator {
                     backSideColors[1][2] = rotatingSideEdgeColors[2][1];
                     backSideColors[2][2] = rotatingSideEdgeColors[2][2];
 
-                    upSideColors[0][0] = rotatingSideEdgeColors[3][0];
+                    upSideColors[0][0] = rotatingSideEdgeColors[3][2];
                     upSideColors[1][0] = rotatingSideEdgeColors[3][1];
-                    upSideColors[2][0] = rotatingSideEdgeColors[3][2];
+                    upSideColors[2][0] = rotatingSideEdgeColors[3][0];
 
                     ((ClassicCubeState) newState).getSides().set(5,
                             sideAfterRotation);
@@ -193,8 +193,8 @@ public class CubeStatesGenerator implements StatesGenerator {
                                     frontSideColors[2][0]},
                             {downSideColors[0][0], downSideColors[1][0],
                                     downSideColors[2][0]},
-                            {backSideColors[0][0], backSideColors[1][0],
-                                    backSideColors[2][0]}};
+                            {backSideColors[0][2], backSideColors[1][2],
+                                    backSideColors[2][2]}};
 
                     frontSideColors[0][0] = rotatingSideEdgeColors[2][0];
                     frontSideColors[1][0] = rotatingSideEdgeColors[2][1];
@@ -204,9 +204,9 @@ public class CubeStatesGenerator implements StatesGenerator {
                     downSideColors[1][0] = rotatingSideEdgeColors[3][1];
                     downSideColors[2][0] = rotatingSideEdgeColors[3][2];
 
-                    backSideColors[0][2] = rotatingSideEdgeColors[0][0];
+                    backSideColors[0][2] = rotatingSideEdgeColors[0][2];
                     backSideColors[1][2] = rotatingSideEdgeColors[0][1];
-                    backSideColors[2][2] = rotatingSideEdgeColors[0][2];
+                    backSideColors[2][2] = rotatingSideEdgeColors[0][0];
 
                     upSideColors[0][0] = rotatingSideEdgeColors[1][0];
                     upSideColors[1][0] = rotatingSideEdgeColors[1][1];

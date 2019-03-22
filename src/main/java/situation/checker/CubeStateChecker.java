@@ -2,6 +2,10 @@ package situation.checker;
 
 import situation.ClassicCubeState;
 import situation.State;
+import situation.generator.CubeStatesGenerator;
+import situation.generator.StatesGenerator;
+
+import java.util.List;
 
 public class CubeStateChecker extends StateChecker {
 
@@ -14,7 +18,7 @@ public class CubeStateChecker extends StateChecker {
     }
 
     @Override
-    public boolean checkGoal(State modelState) {
-        return goalState.equals(modelState);
+    public boolean checkGoal(State currentState) {
+        return goalState.equals(currentState);
     }
 }
