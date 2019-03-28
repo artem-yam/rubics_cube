@@ -1,3 +1,5 @@
+import action.Action;
+import action.Rotation;
 import situation.State;
 import situation.checker.StateChecker;
 import situation.generator.StatesGenerator;
@@ -20,13 +22,35 @@ public class Cuber {
 
     private void reset() {
         isFinished = false;
-        currentStep = 1;
+        currentStep = 0;
     }
 
     public boolean canReachGoal(State currentState, int steps) {
 
         if (!(isFinished = checker.checkGoal(currentState))) {
-            checkNewStates(currentState, steps);
+            //checkNewStates(currentState, steps);
+            checkInDepth(currentState, steps);
+        }
+
+        return isFinished;
+    }
+
+    private boolean checkInDepth(State currentState, int maxSteps) {
+        for (Action rotation : Rotation.values()) {
+            State newState = generator.getNewState(currentState, rotation);
+
+            currentStep++;
+
+            isFinished = checker.checkGoal(newState);
+
+            if (currentStep > maxSteps || (isFinished = checker.checkGoal(
+                    newState)) || (isFinished = checkInDepth(newState,
+                    maxSteps))) {
+                currentStep--;
+                return isFinished;
+            }
+
+            currentStep--;
         }
 
         return isFinished;
@@ -44,7 +68,7 @@ public class Cuber {
 
         for (State state : newStates) {
             currentStep++;
-            if (currentStep > maxSteps || isFinished) {
+            if (currentStep >= maxSteps || isFinished) {
                 currentStep--;
                 break;
             }
