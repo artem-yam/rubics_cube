@@ -67,21 +67,24 @@ public class ClassicCubeState implements State {
 
         Color[] tempColors;
 
+        String formatString = "%3s";
+
         for (int j = 0; j < ((ClassicSide) sides.get(0)).getColors().length;
                 j++) {
 
             tempColors = ((ClassicSide) sides.get(0)).getColors()[j];
 
             for (int i = 0; i < tempColors.length; i++) {
-                sb.append(" ");
+                sb.append(String.format(formatString, " "));
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
             for (Color color : tempColors) {
-                sb.append(((StandardColor) color).getStringForOutput());
+                sb.append(String.format(formatString,
+                        ((StandardColor) color).getStringForOutput()));
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
             for (int i = 0; i < 2 * tempColors.length; i++) {
-                sb.append(" ");
+                sb.append(String.format(formatString, " "));
             }
             sb.append("\n");
         }
@@ -91,26 +94,30 @@ public class ClassicCubeState implements State {
 
             tempColors = ((ClassicSide) sides.get(5)).getColors()[j];
             for (Color color : tempColors) {
-                sb.append(((StandardColor) color).getStringForOutput());
+                sb.append(String.format(formatString,
+                        ((StandardColor) color).getStringForOutput()));
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
 
             tempColors = ((ClassicSide) sides.get(2)).getColors()[j];
             for (Color color : tempColors) {
-                sb.append(((StandardColor) color).getStringForOutput());
+                sb.append(String.format(formatString,
+                        ((StandardColor) color).getStringForOutput()));
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
 
             tempColors = ((ClassicSide) sides.get(3)).getColors()[j];
             for (Color color : tempColors) {
-                sb.append(((StandardColor) color).getStringForOutput());
+                sb.append(String.format(formatString,
+                        ((StandardColor) color).getStringForOutput()));
 
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
 
             tempColors = ((ClassicSide) sides.get(4)).getColors()[j];
             for (Color color : tempColors) {
-                sb.append(((StandardColor) color).getStringForOutput());
+                sb.append(String.format(formatString,
+                        ((StandardColor) color).getStringForOutput()));
             }
 
             sb.append("\n");
@@ -122,15 +129,16 @@ public class ClassicCubeState implements State {
             tempColors = ((ClassicSide) sides.get(1)).getColors()[j];
 
             for (int i = 0; i < tempColors.length; i++) {
-                sb.append(" ");
+                sb.append(String.format(formatString, " "));
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
             for (Color color : tempColors) {
-                sb.append(((StandardColor) color).getStringForOutput());
+                sb.append(String.format(formatString,
+                        ((StandardColor) color).getStringForOutput()));
             }
-            sb.append("|");
+            sb.append(String.format(formatString, "|"));
             for (int i = 0; i < 2 * tempColors.length; i++) {
-                sb.append(" ");
+                sb.append(String.format(formatString, " "));
             }
             sb.append("\n");
         }

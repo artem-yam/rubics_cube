@@ -4,6 +4,7 @@ import situation.State;
 import situation.checker.StateChecker;
 import situation.generator.StatesGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cuber {
@@ -28,14 +29,42 @@ public class Cuber {
     public boolean canReachGoal(State currentState, int steps) {
 
         if (!(isFinished = checker.checkGoal(currentState))) {
-            //checkNewStates(currentState, steps);
-            checkInDepth(currentState, steps);
+            checkInWidth(currentState, steps);
+           // checkInDepth(currentState, steps);
+        }
+
+        return isFinished;
+    }
+
+    private boolean checkInWidth(State currentState, int maxSteps) {
+        List<State> newStates = new ArrayList<>();
+        newStates.add(currentState);
+
+        while (!isFinished && currentStep < maxSteps) {
+
+            currentStep++;
+
+            List<State> tempList = new ArrayList<>();
+
+            for (State state : newStates) {
+                tempList.addAll(generator.getAllNewPossibleStates(state));
+            }
+
+            newStates = tempList;
+
+            for (State state : newStates) {
+                if (isFinished = checker.checkGoal(state)) {
+                    break;
+                }
+            }
+
         }
 
         return isFinished;
     }
 
     private boolean checkInDepth(State currentState, int maxSteps) {
+
         for (Action rotation : Rotation.values()) {
             State newState = generator.getNewState(currentState, rotation);
 
@@ -49,31 +78,6 @@ public class Cuber {
                 currentStep--;
                 return isFinished;
             }
-
-            currentStep--;
-        }
-
-        return isFinished;
-    }
-
-    private boolean checkNewStates(State currentState, int maxSteps) {
-
-        List<State> newStates = generator.getAllNewPossibleStates(currentState);
-
-        for (State state : newStates) {
-            if (isFinished = checker.checkGoal(state)) {
-                return isFinished;
-            }
-        }
-
-        for (State state : newStates) {
-            currentStep++;
-            if (currentStep >= maxSteps || isFinished) {
-                currentStep--;
-                break;
-            }
-
-            isFinished = checkNewStates(state, maxSteps);
 
             currentStep--;
         }
