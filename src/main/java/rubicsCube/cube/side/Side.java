@@ -1,4 +1,4 @@
-package cube.side;
+package rubicsCube.cube.side;
 
 import java.io.Serializable;
 

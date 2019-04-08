@@ -1,9 +1,9 @@
-package situation;
+package rubicsCube.situation;
 
-import cube.color.Color;
-import cube.color.StandardColor;
-import cube.side.ClassicSide;
-import cube.side.Side;
+import rubicsCube.cube.color.Color;
+import rubicsCube.cube.color.StandardColor;
+import rubicsCube.cube.side.ClassicSide;
+import rubicsCube.cube.side.Side;
 
 import java.util.ArrayList;
 import java.util.List;

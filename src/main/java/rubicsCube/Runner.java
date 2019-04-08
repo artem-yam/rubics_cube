@@ -1,10 +1,14 @@
-import action.Rotation;
-import situation.ClassicCubeState;
-import situation.State;
-import situation.checker.CubeStateChecker;
-import situation.checker.StateChecker;
-import situation.generator.CubeStatesGenerator;
-import situation.generator.StatesGenerator;
+package rubicsCube;
+
+import rubicsCube.action.Rotation;
+import rubicsCube.situation.ClassicCubeState;
+import rubicsCube.situation.State;
+import rubicsCube.situation.checker.CubeStateChecker;
+import rubicsCube.situation.checker.StateChecker;
+import rubicsCube.situation.generator.CubeStatesGenerator;
+import rubicsCube.situation.generator.StatesGenerator;
+import rubicsCube.situation.searcher.SearchInDepth;
+import rubicsCube.situation.searcher.SearchInWidth;
 
 public class Runner {
 
@@ -54,8 +58,10 @@ public class Runner {
 
         Cuber cuber = new Cuber(checker, generator);
 
-        System.out.println(cuber.canReachGoal(modelState, 4));
-
+        System.out.println(
+                cuber.canReachGoal(new SearchInWidth(), modelState, 4));
+     //   System.out.println(
+     //           cuber.canReachGoal(new SearchInDepth(), modelState, 4));
     }
 
 }

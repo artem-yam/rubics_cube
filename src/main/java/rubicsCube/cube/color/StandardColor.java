@@ -1,4 +1,4 @@
-package cube.color;
+package rubicsCube.cube.color;
 
 public enum StandardColor implements Color {
 

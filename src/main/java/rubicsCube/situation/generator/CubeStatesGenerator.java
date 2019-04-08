@@ -1,16 +1,16 @@
-package situation.generator;
+package rubicsCube.situation.generator;
 
-import action.Action;
-import action.Rotation;
-import cube.color.Color;
-import cube.side.ClassicSide;
-import cube.side.Side;
-import situation.ClassicCubeState;
-import situation.State;
+import rubicsCube.action.Action;
+import rubicsCube.action.Rotation;
+import rubicsCube.cube.color.Color;
+import rubicsCube.cube.side.ClassicSide;
+import rubicsCube.cube.side.Side;
+import rubicsCube.situation.ClassicCubeState;
+import rubicsCube.situation.State;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CubeStatesGenerator implements StatesGenerator {
 
@@ -541,11 +541,16 @@ public class CubeStatesGenerator implements StatesGenerator {
     }
 
     @Override
-    public List<State> getAllNewPossibleStates(State currentState) {
-        List<State> newStates = new ArrayList<>();
+    public Map<Action, State> getAllNewPossibleStates(State currentState,
+                                                      Action lastAction) {
+        Map<Action, State> newStates = new HashMap<>();
+        //List<State> newStates = new ArrayList<>();
 
         for (Rotation rotation : Rotation.values()) {
-            newStates.add(getNewState(currentState, rotation));
+            if (lastAction == null || rotation != lastAction) {
+                newStates.put(rotation, getNewState(currentState, rotation));
+                //newStates.add(getNewState(currentState, rotation));
+            }
         }
 
         return newStates;

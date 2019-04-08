@@ -1,6 +1,6 @@
-package situation.checker;
+package rubicsCube.situation.checker;
 
-import situation.State;
+import rubicsCube.situation.State;
 
 public abstract class StateChecker {
 

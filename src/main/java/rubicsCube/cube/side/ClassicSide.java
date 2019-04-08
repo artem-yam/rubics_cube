@@ -1,7 +1,6 @@
-package cube.side;
+package rubicsCube.cube.side;
 
-import cube.color.Color;
-import cube.color.StandardColor;
+import rubicsCube.cube.color.Color;
 
 import java.util.Arrays;
 

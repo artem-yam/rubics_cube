@@ -1,4 +1,4 @@
-package situation;
+package rubicsCube.situation;
 
 import java.io.Serializable;
 

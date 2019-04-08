@@ -1,11 +1,7 @@
-package situation.checker;
+package rubicsCube.situation.checker;
 
-import situation.ClassicCubeState;
-import situation.State;
-import situation.generator.CubeStatesGenerator;
-import situation.generator.StatesGenerator;
-
-import java.util.List;
+import rubicsCube.situation.ClassicCubeState;
+import rubicsCube.situation.State;
 
 public class CubeStateChecker extends StateChecker {
 
