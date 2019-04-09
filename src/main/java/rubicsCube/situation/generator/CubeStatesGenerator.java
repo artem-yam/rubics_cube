@@ -545,9 +545,50 @@ public class CubeStatesGenerator implements StatesGenerator {
                                                       Action lastAction) {
         Map<Action, State> newStates = new HashMap<>();
         //List<State> newStates = new ArrayList<>();
+        Action wasteAction = lastAction;
+        if (wasteAction != null) {
+            switch ((Rotation) lastAction) {
+                case RIGHT:
+                    wasteAction = Rotation.CON_RIGHT;
+                    break;
+                case CON_RIGHT:
+                    wasteAction = Rotation.RIGHT;
+                    break;
+                case LEFT:
+                    wasteAction = Rotation.CON_LEFT;
+                    break;
+                case CON_LEFT:
+                    wasteAction = Rotation.LEFT;
+                    break;
+                case UP:
+                    wasteAction = Rotation.CON_UP;
+                    break;
+                case CON_UP:
+                    wasteAction = Rotation.UP;
+                    break;
+                case DOWN:
+                    wasteAction = Rotation.CON_DOWN;
+                    break;
+                case CON_DOWN:
+                    wasteAction = Rotation.DOWN;
+                    break;
+                case FRONT:
+                    wasteAction = Rotation.CON_FRONT;
+                    break;
+                case CON_FRONT:
+                    wasteAction = Rotation.FRONT;
+                    break;
+                case BACK:
+                    wasteAction = Rotation.CON_BACK;
+                    break;
+                case CON_BACK:
+                    wasteAction = Rotation.BACK;
+                    break;
+            }
+        }
 
         for (Rotation rotation : Rotation.values()) {
-            if (lastAction == null || rotation != lastAction) {
+            if (wasteAction == null || rotation != wasteAction) {
                 newStates.put(rotation, getNewState(currentState, rotation));
                 //newStates.add(getNewState(currentState, rotation));
             }
