@@ -7,6 +7,7 @@ import rubicsCube.situation.checker.CubeStateChecker;
 import rubicsCube.situation.checker.StateChecker;
 import rubicsCube.situation.generator.CubeStatesGenerator;
 import rubicsCube.situation.generator.StatesGenerator;
+import rubicsCube.situation.searcher.SearchEngine;
 import rubicsCube.situation.searcher.SearchInDepth;
 import rubicsCube.situation.searcher.SearchInWidth;
 
@@ -57,11 +58,15 @@ public class Runner {
         //-----------------------------------------------------------------
 
         Cuber cuber = new Cuber(checker, generator);
+        SearchEngine widthSearcher = new SearchInWidth();
+        SearchEngine depthSearcher = new SearchInDepth();
 
         System.out.println(
-                cuber.canReachGoal(new SearchInWidth(), modelState, 4));
-     //   System.out.println(
-     //           cuber.canReachGoal(new SearchInDepth(), modelState, 4));
+                cuber.canReachGoal(widthSearcher, modelState, 3));
+        System.out.println(widthSearcher.getSearchTree().size());
+        System.out.println(
+                cuber.canReachGoal(depthSearcher, modelState, 4));
+        System.out.println(depthSearcher.getSearchTree().size());
     }
 
 }

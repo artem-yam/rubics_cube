@@ -3,9 +3,11 @@ package rubicsCube.situation.searcher;
 import rubicsCube.action.Action;
 import rubicsCube.action.Rotation;
 import rubicsCube.situation.State;
-import rubicsCube.utils.ByteArrayComparator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class SearchInWidth extends AbstractSearch {
 
@@ -17,10 +19,7 @@ public class SearchInWidth extends AbstractSearch {
         newStates.add(currentState);
         rotationsDone.add(null);
 
-        Map<byte[], State> treeMap =
-                new TreeMap(new ByteArrayComparator());
-
-        treeMap.put(new byte[]{(byte) currentStep}, currentState);
+        searchTree.put(new byte[]{(byte) currentStep}, currentState);
 
         while (!isFinished && currentStep < maxSteps) {
 
@@ -38,7 +37,7 @@ public class SearchInWidth extends AbstractSearch {
                 List<State> nextStates =
                         new ArrayList<>(statesWithRotations.values());
 
-                fillTree(treeMap, state, nextStates);
+                fillTree(searchTree, state, nextStates);
 
                 allStates.addAll(nextStates);
                 newRotations.addAll(Arrays.asList(Rotation.values()));
@@ -56,30 +55,5 @@ public class SearchInWidth extends AbstractSearch {
         }
 
         return isFinished;
-
-    }
-
-    private void fillTree(Map<byte[], State> treeMap, State parentNode,
-                          List<State> childNodes) {
-        byte[] bytes;
-        byte[] stateKey = new byte[0];
-
-        for (byte[] key : treeMap.keySet()) {
-            if (treeMap.get(key).equals(parentNode)) {
-                stateKey = key;
-                break;
-            }
-        }
-
-        for (State someState : childNodes) {
-            bytes = new byte[stateKey.length + 1];
-            for (int i = 0; i < stateKey.length; i++) {
-                bytes[i] = stateKey[i];
-            }
-            bytes[bytes.length - 1] =
-                    (byte) childNodes.indexOf(someState);
-
-            treeMap.put(bytes, someState);
-        }
     }
 }
