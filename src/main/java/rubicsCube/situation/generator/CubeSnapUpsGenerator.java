@@ -11,7 +11,7 @@ import rubicsCube.situation.State;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtendedCubeStatesGenerator extends CubeStatesGenerator {
+public class CubeSnapUpsGenerator {
     
     public State getSnapUpResultState(State currentState, Action action) {
         State newState = null;
@@ -44,7 +44,7 @@ public class ExtendedCubeStatesGenerator extends CubeStatesGenerator {
                 break;
             case RIGHT_TO_FRONT:
                 newState = new ClassicCubeState(upSide, downSide, rightSide,
-                    frontSide, leftSide, backSide);
+                    backSide, leftSide, frontSide);
                 break;
             case UP_TO_FRONT:
                 newUpSide = new ClassicSide(new Color[][]{
@@ -219,16 +219,16 @@ public class ExtendedCubeStatesGenerator extends CubeStatesGenerator {
         List<State> newStates = new ArrayList<>();
         
         for (SnapUp snapUp : SnapUp.values()) {
-            State newState = getNewState(currentState, snapUp);
+            State newState = getSnapUpResultState(currentState, snapUp);
             newStates.add(newState);
             
             switch (snapUp) {
                 case LEFT_TO_FRONT:
-                    newState = getNewState(newState, snapUp);
+                    newState = getSnapUpResultState(newState, snapUp);
                     newStates.add(newState);
                     break;
                 case LEFT_TO_UP:
-                    newState = getNewState(newState, snapUp);
+                    newState = getSnapUpResultState(newState, snapUp);
                     newStates.add(newState);
                     newStates.addAll(getHorizontalSnapUps(newState));
                     
@@ -244,7 +244,7 @@ public class ExtendedCubeStatesGenerator extends CubeStatesGenerator {
         List<State> snapUps = new ArrayList<>();
         
         for (int i = 0; i < 3; i++) {
-            State newState = getNewState(currentState, snapUp);
+            State newState = getSnapUpResultState(currentState, snapUp);
             snapUps.add(newState);
         }
         

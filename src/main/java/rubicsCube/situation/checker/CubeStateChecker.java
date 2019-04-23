@@ -2,7 +2,7 @@ package rubicsCube.situation.checker;
 
 import rubicsCube.situation.ClassicCubeState;
 import rubicsCube.situation.State;
-import rubicsCube.situation.generator.ExtendedCubeStatesGenerator;
+import rubicsCube.situation.generator.CubeSnapUpsGenerator;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class CubeStateChecker extends StateChecker {
         
         if (!isGoalState) {
             List<State> allSnapUps =
-                new ExtendedCubeStatesGenerator().getAllSnapUpResultStates(
+                new CubeSnapUpsGenerator().getAllSnapUpResultStates(
                     currentState);
             
             for (State state : allSnapUps) {
