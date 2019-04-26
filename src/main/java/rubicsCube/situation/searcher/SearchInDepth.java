@@ -7,44 +7,48 @@ import rubicsCube.situation.State;
 import java.util.HashSet;
 
 public class SearchInDepth extends AbstractSearch {
-
-    private HashSet<State> visitedStates;
-
+    
+    protected HashSet<State> visitedStates;
+    
     @Override
     public boolean search(State currentState, int maxSteps) {
         visitedStates = new HashSet<>();
-
+        
         searchTree.put(new byte[]{(byte) currentStep}, currentState);
         visitedStates.add(currentState);
-
+        
         return recursiveSearch(currentState, maxSteps);
     }
-
+    
     private boolean recursiveSearch(State currentState, int maxSteps) {
-        //TODO пофиксить нумерацию в дереве
         for (Action rotation : Rotation.values()) {
-            State newState = generator.getNewState(currentState, rotation);
-
-            if (!visitedStates.contains(newState)) {
-
-                visitedStates.add(newState);
-                fillTree(searchTree, currentState, newState);
-
-                currentStep++;
-
-                isFinished = checker.checkGoal(newState);
-
-                if (currentStep > maxSteps || (isFinished = checker.checkGoal(
-                        newState)) || (isFinished = recursiveSearch(newState,
-                        maxSteps))) {
-                    currentStep--;
-                    return isFinished;
-                }
-
+            
+            if (++currentStep <= maxSteps) {
+                State newState = generator.getNewState(currentState, rotation);
+                
+                checkStateAndChildren(currentState, newState, maxSteps);
+            } else {
                 currentStep--;
+                return isFinished;
             }
+            
         }
-
+        
         return isFinished;
+    }
+    
+    protected void checkStateAndChildren(State parentState, State state,
+                                         int maxSteps) {
+        if (!visitedStates.contains(state)) {
+            
+            visitedStates.add(state);
+            fillTree(searchTree, parentState, state);
+            
+            isFinished = checker.checkGoal(state) ||
+                             recursiveSearch(state, maxSteps);
+            
+            currentStep--;
+            
+        }
     }
 }

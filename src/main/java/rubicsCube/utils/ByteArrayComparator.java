@@ -3,7 +3,7 @@ package rubicsCube.utils;
 import java.util.Comparator;
 
 public class ByteArrayComparator implements Comparator {
-
+    
     @Override
     public int compare(Object o1, Object o2) {
         int result = 0;
@@ -11,28 +11,22 @@ public class ByteArrayComparator implements Comparator {
                 ((byte[]) o2).length) {
             result = 1;
         } else if (((byte[]) o1).length <
-                ((byte[]) o2).length) {
+                       ((byte[]) o2).length) {
             result = -1;
         } else {
-            for (int i = 0; i < ((byte[]) o1).length;
-                 i++) {
+            for (int i = 0; i < ((byte[]) o1).length; i++) {
                 if (((byte[]) o1)[i] <
                         ((byte[]) o2)[i]) {
                     result = -1;
                     break;
-                }
-                if (((byte[]) o1)[i] >
-                        ((byte[]) o2)[i]) {
+                } else if (((byte[]) o1)[i] >
+                               ((byte[]) o2)[i]) {
                     result = 1;
                     break;
                 }
-                if (((byte[]) o1)[i] ==
-                        ((byte[]) o2)[i]) {
-                    result = 0;
-                }
             }
         }
-
+        
         return result;
     }
 }

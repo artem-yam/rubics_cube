@@ -1,11 +1,17 @@
 package rubicsCube;
 
+import rubicsCube.action.Rotation;
 import rubicsCube.situation.ClassicCubeState;
 import rubicsCube.situation.State;
 import rubicsCube.situation.checker.CubeStateChecker;
 import rubicsCube.situation.checker.StateChecker;
 import rubicsCube.situation.generator.CubeStatesGenerator;
 import rubicsCube.situation.generator.StatesGenerator;
+import rubicsCube.situation.searcher.SearchEngine;
+import rubicsCube.situation.searcher.SearchInDepth;
+import rubicsCube.situation.searcher.SearchInWidth;
+import rubicsCube.situation.searcher.evaluation.BestPartialPathSearch;
+import rubicsCube.situation.searcher.evaluation.GradientSearch;
 
 public class Runner {
     
@@ -21,31 +27,26 @@ public class Runner {
         System.out.println(modelState);
         //TODO нужно протестить правильность работы сравнения
         
-        
-        
-       
-        
-     /*   modelState = generator.getNewState(modelState, Rotation.RIGHT);
+        modelState = generator.getNewState(modelState, Rotation.RIGHT);
         System.out.println(Rotation.RIGHT.toString() +
-            "\n------------------------------------\n" +
-            modelState);
+                               "\n------------------------------------\n" +
+                               modelState);
         modelState = generator.getNewState(modelState, Rotation.UP);
         System.out.println(Rotation.UP.toString() +
-            "\n------------------------------------\n" +
-            modelState);
+                               "\n------------------------------------\n" +
+                               modelState);
         modelState = generator.getNewState(modelState, Rotation.CON_RIGHT);
         System.out.println(Rotation.CON_RIGHT.toString() +
-            "\n------------------------------------\n" +
-            modelState);
+                               "\n------------------------------------\n" +
+                               modelState);
         modelState = generator.getNewState(modelState, Rotation.CON_UP);
         System.out.println(Rotation.CON_UP.toString() +
-            "\n------------------------------------\n" +
-            modelState);*/
+                               "\n------------------------------------\n" +
+                               modelState);
         
         //------------------------------------------------------------------
 
-        /*
-        modelState = generator.getNewState(modelState, Rotation.UP);
+        /*modelState = generator.getNewState(modelState, Rotation.UP);
         System.out.println(Rotation.UP.toString() +
                 "\n------------------------------------\n" + modelState);
         modelState = generator.getNewState(modelState, Rotation.RIGHT);
@@ -56,23 +57,24 @@ public class Runner {
                 "\n------------------------------------\n" + modelState);
         modelState = generator.getNewState(modelState, Rotation.CON_RIGHT);
         System.out.println(Rotation.CON_RIGHT.toString() +
-                "\n------------------------------------\n" + modelState);
-        */
+                "\n------------------------------------\n" + modelState);*/
         
         //-----------------------------------------------------------------
         
-        
-        
-        
-        
-     /*   Cuber cuber = new Cuber(checker, generator);
+        Cuber cuber = new Cuber(checker, generator);
         SearchEngine widthSearcher = new SearchInWidth();
         SearchEngine depthSearcher = new SearchInDepth();
+        SearchEngine gradientSearcher = new GradientSearch();
+        SearchEngine partialSearcheer = new BestPartialPathSearch(2);
         
-        System.out.println(cuber.canReachGoal(widthSearcher, modelState, 3));
+        System.out.println(cuber.canReachGoal(widthSearcher, modelState, 4));
         System.out.println(widthSearcher.getSearchTree().size());
-        System.out.println(cuber.canReachGoal(depthSearcher, modelState, 4));
-        System.out.println(depthSearcher.getSearchTree().size());*/
+        System.out.println(cuber.canReachGoal(partialSearcheer, modelState, 4));
+        System.out.println(partialSearcheer.getSearchTree().size());
+        //System.out.println(cuber.canReachGoal(depthSearcher, modelState, 2));
+        //System.out.println(depthSearcher.getSearchTree().size());
+        //System.out.println(cuber.canReachGoal(gradientSearcher, modelState, 2));
+        //System.out.println(gradientSearcher.getSearchTree().size());
     }
     
 }
