@@ -33,9 +33,8 @@ public class GradientSearch extends SearchInDepth {
     }
     
     private boolean recursiveSearch(State currentState, int maxSteps) {
-        List<State> newStates =
-            new ArrayList<>(generator.getAllNewPossibleStates(currentState,
-                null).values());
+        List<State> newStates = new ArrayList<>(
+            generator.getAllNewPossibleStates(currentState));
         newStates.sort(new EvaluationComparator<>(evaluation));
         
         for (State state : newStates) {

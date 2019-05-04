@@ -36,7 +36,7 @@ public abstract class AbstractSearch implements SearchEngine {
     }
     
     protected void fillTree(Map<byte[], State> treeMap, State parentNode,
-                            List<State> childNodes) {
+        List<State> childNodes) {
         byte[] bytes;
         byte[] stateKey = getParentKey(treeMap, parentNode);
         
@@ -45,15 +45,14 @@ public abstract class AbstractSearch implements SearchEngine {
             for (int i = 0; i < stateKey.length; i++) {
                 bytes[i] = stateKey[i];
             }
-            bytes[bytes.length - 1] =
-                (byte) childNodes.indexOf(someState);
+            bytes[bytes.length - 1] = (byte) childNodes.indexOf(someState);
             
             treeMap.put(bytes, someState);
         }
     }
     
     protected void fillTree(Map<byte[], State> treeMap, State parentNode,
-                            State childNode) {
+        State childNode) {
         
         byte[] stateKey = getParentKey(treeMap, parentNode);
         
@@ -63,8 +62,7 @@ public abstract class AbstractSearch implements SearchEngine {
         }
         
         byte[] tempKey = bytes.clone();
-        tempKey[tempKey.length - 2] =
-            (byte) (stateKey[bytes.length - 2] + 1);
+        tempKey[tempKey.length - 2] = (byte) (stateKey[bytes.length - 2] + 1);
         
         int childNodeLevelKeysCount = 0;
         
@@ -72,8 +70,8 @@ public abstract class AbstractSearch implements SearchEngine {
             
             Comparator comp = new ByteArrayComparator();
             
-            if (comp.compare(key, bytes) >= 0 &&
-                    comp.compare(key, tempKey) < 0) {
+            if (comp.compare(key, bytes) >= 0 && comp.compare(key, tempKey) <
+                                                     0) {
                 childNodeLevelKeysCount++;
             }
         }

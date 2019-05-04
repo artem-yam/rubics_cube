@@ -21,11 +21,11 @@ public class Runner {
         
         State modelState = new ClassicCubeState();
         
-        // System.out.println(new ClassicCubeEvaluationFunction().calculate(modelState));
+        // System.out.println(new ClassicCubeEvaluationFunction().calculate
+        // (modelState));
         
         System.out.println(checker.checkGoal(modelState));
         System.out.println(modelState);
-        //TODO нужно протестить правильность работы сравнения
         
         modelState = generator.getNewState(modelState, Rotation.RIGHT);
         System.out.println(Rotation.RIGHT.toString() +
@@ -65,16 +65,19 @@ public class Runner {
         SearchEngine widthSearcher = new SearchInWidth();
         SearchEngine depthSearcher = new SearchInDepth();
         SearchEngine gradientSearcher = new GradientSearch();
-        SearchEngine partialSearcheer = new BestPartialPathSearch(2);
+        SearchEngine partialSearcher = new BestPartialPathSearch(2);
         
-        System.out.println(cuber.canReachGoal(widthSearcher, modelState, 4));
-        System.out.println(widthSearcher.getSearchTree().size());
-        System.out.println(cuber.canReachGoal(partialSearcheer, modelState, 4));
-        System.out.println(partialSearcheer.getSearchTree().size());
-        //System.out.println(cuber.canReachGoal(depthSearcher, modelState, 2));
-        //System.out.println(depthSearcher.getSearchTree().size());
-        //System.out.println(cuber.canReachGoal(gradientSearcher, modelState, 2));
-        //System.out.println(gradientSearcher.getSearchTree().size());
+        /*System.out.println(cuber.canReachGoal(widthSearcher, modelState, 4));
+        System.out.println(widthSearcher.getSearchTree().size());*/
+        
+        System.out.println(cuber.canReachGoal(partialSearcher, modelState, 4));
+        System.out.println(partialSearcher.getSearchTree().size());
+        
+        /*System.out.println(cuber.canReachGoal(depthSearcher, modelState, 4));
+        System.out.println(depthSearcher.getSearchTree().size());*/
+        
+        /*System.out.println(cuber.canReachGoal(gradientSearcher, modelState, 4));
+        System.out.println(gradientSearcher.getSearchTree().size());*/
     }
     
 }

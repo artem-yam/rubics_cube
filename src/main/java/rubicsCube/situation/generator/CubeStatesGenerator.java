@@ -9,12 +9,13 @@ import rubicsCube.situation.ClassicCubeState;
 import rubicsCube.situation.State;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CubeStatesGenerator implements StatesGenerator {
     
-    protected State getStateClone(State state)
+    @Override
+    public State getStateClone(State state)
         throws IOException, ClassNotFoundException {
         
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -32,6 +33,7 @@ public class CubeStatesGenerator implements StatesGenerator {
         State newState = null;
         try {
             newState = getStateClone(currentState);
+            newState.setLastAction(action);
             
             Color[][] upSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(0))
@@ -541,55 +543,17 @@ public class CubeStatesGenerator implements StatesGenerator {
     }
     
     @Override
-    public Map<Action, State> getAllNewPossibleStates(State currentState,
-        Action lastAction) {
-        Map<Action, State> newStates = new HashMap<>();
+    public List<State> getAllNewPossibleStates(State currentState) {
+        List<State> newStates = new ArrayList<>();
         
-        Action wasteAction = lastAction;
-        if (wasteAction != null) {
-            switch ((Rotation) lastAction) {
-                case RIGHT:
-                    wasteAction = Rotation.CON_RIGHT;
-                    break;
-                case CON_RIGHT:
-                    wasteAction = Rotation.RIGHT;
-                    break;
-                case LEFT:
-                    wasteAction = Rotation.CON_LEFT;
-                    break;
-                case CON_LEFT:
-                    wasteAction = Rotation.LEFT;
-                    break;
-                case UP:
-                    wasteAction = Rotation.CON_UP;
-                    break;
-                case CON_UP:
-                    wasteAction = Rotation.UP;
-                    break;
-                case DOWN:
-                    wasteAction = Rotation.CON_DOWN;
-                    break;
-                case CON_DOWN:
-                    wasteAction = Rotation.DOWN;
-                    break;
-                case FRONT:
-                    wasteAction = Rotation.CON_FRONT;
-                    break;
-                case CON_FRONT:
-                    wasteAction = Rotation.FRONT;
-                    break;
-                case BACK:
-                    wasteAction = Rotation.CON_BACK;
-                    break;
-                case CON_BACK:
-                    wasteAction = Rotation.BACK;
-                    break;
-            }
+        Action wasteAction = null;
+        if (currentState.getLastAction() != null) {
+            wasteAction = currentState.getLastAction().getReverse();
         }
         
         for (Rotation rotation : Rotation.values()) {
             if (wasteAction == null || rotation != wasteAction) {
-                newStates.put(rotation, getNewState(currentState, rotation));
+                newStates.add(getNewState(currentState, rotation));
                 //newStates.add(getNewState(currentState, rotation));
             }
         }
