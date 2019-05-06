@@ -16,31 +16,32 @@ public class SearchInWidth extends AbstractSearch {
         searchTree.put(new byte[]{(byte) currentStep}, currentState);
         
         while (!isFinished && currentStep < maxSteps) {
-            
-            currentStep++;
-            
-            List<State> allStates = new ArrayList<>();
-            
-            for (State state : newStates) {
-                
-                List<State> nextStates = generator.getAllNewPossibleStates(
-                    state);
-                
-                fillTree(searchTree, state, nextStates);
-                
-                allStates.addAll(nextStates);
-            }
-            
-            newStates = allStates;
-            
-            for (State state : newStates) {
-                if (isFinished = checker.checkGoal(state)) {
-                    break;
-                }
-            }
-            
+            newStates = generateNextStep(newStates);
         }
         
         return isFinished;
     }
+    
+    protected List<State> generateNextStep(List<State> states) {
+        currentStep++;
+        
+        List<State> allStates = new ArrayList<>();
+        
+        for (State state : states) {
+            
+            List<State> nextStates = generator.getAllNewPossibleStates(
+                state);
+            
+            fillTree(searchTree, state, nextStates);
+            
+            allStates.addAll(nextStates);
+        }
+        
+        states = allStates;
+        
+        checkStates(states);
+        
+        return states;
+    }
+    
 }

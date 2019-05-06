@@ -2,9 +2,9 @@ package rubicsCube.situation.searcher.evaluation;
 
 import rubicsCube.situation.State;
 import rubicsCube.situation.searcher.SearchInDepth;
-import rubicsCube.utils.evaluationFunction.ClassicCubeEvaluationFunction;
-import rubicsCube.utils.evaluationFunction.EvaluationComparator;
-import rubicsCube.utils.evaluationFunction.EvaluationFunction;
+import rubicsCube.utils.evaluation.ClassicCubeEvaluationFunction;
+import rubicsCube.utils.evaluation.EvaluationComparator;
+import rubicsCube.utils.evaluation.EvaluationFunction;
 
 import java.util.ArrayList;
 import java.util.HashSet;

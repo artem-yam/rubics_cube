@@ -2,17 +2,19 @@ package rubicsCube.situation.searcher.evaluation;
 
 import rubicsCube.situation.State;
 import rubicsCube.situation.searcher.SearchInWidth;
-import rubicsCube.utils.evaluationFunction.EvaluationComparator;
+import rubicsCube.utils.evaluation.EvaluationComparator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BestPartialPathSearch extends SearchInWidth {
     
-    //private List<State> states = new ArrayList<>();
-    //private List<Action> rotationsDone = new ArrayList<>();
     private int partDepth;
     private int stepsDone;
+    
+    /*private int bestEvaluation = 0;
+    private EvaluationFunction evaluation = new ClassicCubeEvaluationFunction();
+    */
     
     public BestPartialPathSearch(int partDepth) {
         this.partDepth = partDepth;
@@ -21,30 +23,33 @@ public class BestPartialPathSearch extends SearchInWidth {
     @Override
     public boolean search(State currentState, int maxSteps) {
         List<State> newStates = new ArrayList<>();
-        //List<Action> rotationsDone = new ArrayList<>();
         newStates.add(currentState);
-        //rotationsDone.add(null);
         
         searchTree.put(new byte[]{(byte) currentStep}, currentState);
         
         recursiveSearch(newStates, maxSteps);
         
-        /*while (!isFinished && currentStep < maxSteps) {
-            newStates.sort(new EvaluationComparator<>());
-            newStates = partialWidthSearch(newStates.get(0), partDepth,
-                maxSteps);
-        }*/
-        
         return isFinished;
     }
     
     private void recursiveSearch(List<State> states, int maxSteps) {
+        
         if (!isFinished && currentStep < maxSteps) {
             states.sort(new EvaluationComparator<>());
+            
+            /*int stepBestEvaluation = evaluation.calculate(states.get(0));
+            if (stepBestEvaluation >= bestEvaluation) {
+                bestEvaluation = stepBestEvaluation;
+            } else {
+                return;
+            }*/
             
             for (int i = 0; i < states.size() && !isFinished; i++) {
                 List<State> newStates = partialWidthSearch(states.get(i),
                     partDepth, maxSteps);
+                
+                //bestEvaluation = evaluation.calculate(states.get(i));
+                
                 recursiveSearch(newStates, maxSteps);
                 currentStep -= stepsDone;
             }
@@ -53,7 +58,7 @@ public class BestPartialPathSearch extends SearchInWidth {
     }
     
     private List<State> partialWidthSearch(State currentState,
-        int maxPartialSteps, int maxSteps) {
+                                           int maxPartialSteps, int maxSteps) {
         stepsDone = 0;
         
         List<State> newStates = new ArrayList<>();
@@ -62,28 +67,9 @@ public class BestPartialPathSearch extends SearchInWidth {
         while (!isFinished && stepsDone < maxPartialSteps &&
                    currentStep < maxSteps) {
             
-            currentStep++;
             stepsDone++;
             
-            List<State> allStates = new ArrayList<>();
-            
-            for (State state : newStates) {
-                
-                List<State> nextStates = generator.getAllNewPossibleStates(
-                    state);
-                
-                fillTree(searchTree, state, nextStates);
-                
-                allStates.addAll(nextStates);
-            }
-            
-            newStates = allStates;
-            
-            for (State state : newStates) {
-                if (isFinished = checker.checkGoal(state)) {
-                    break;
-                }
-            }
+            newStates = generateNextStep(newStates);
             
         }
         

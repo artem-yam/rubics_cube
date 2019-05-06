@@ -1,4 +1,4 @@
-package rubicsCube.utils.evaluationFunction;
+package rubicsCube.utils.evaluation;
 
 import rubicsCube.cube.color.Color;
 import rubicsCube.cube.side.ClassicSide;
