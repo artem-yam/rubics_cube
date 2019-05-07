@@ -11,6 +11,7 @@ import rubicsCube.situation.searcher.SearchEngine;
 import rubicsCube.situation.searcher.SearchInDepth;
 import rubicsCube.situation.searcher.SearchInWidth;
 import rubicsCube.situation.searcher.evaluation.BestPartialPathSearch;
+import rubicsCube.situation.searcher.evaluation.BranchAndBoundStrategySearch;
 import rubicsCube.situation.searcher.evaluation.GradientSearch;
 
 public class Runner {
@@ -66,12 +67,17 @@ public class Runner {
         SearchEngine depthSearcher = new SearchInDepth();
         SearchEngine gradientSearcher = new GradientSearch();
         SearchEngine partialSearcher = new BestPartialPathSearch(2);
+        SearchEngine branchAndBoundSearcher = new BranchAndBoundStrategySearch();
+        
         
         /*System.out.println(cuber.canReachGoal(widthSearcher, modelState, 4));
         System.out.println(widthSearcher.getSearchTree().size());*/
         
-        System.out.println(cuber.canReachGoal(partialSearcher, modelState, 4));
-        System.out.println(partialSearcher.getSearchTree().size());
+        /*System.out.println(cuber.canReachGoal(partialSearcher, modelState, 4));
+        System.out.println(partialSearcher.getSearchTree().size());*/
+    
+        System.out.println(cuber.canReachGoal(branchAndBoundSearcher, modelState, 4));
+        System.out.println(branchAndBoundSearcher.getSearchTree().size());
         
         /*System.out.println(cuber.canReachGoal(depthSearcher, modelState, 4));
         System.out.println(depthSearcher.getSearchTree().size());*/

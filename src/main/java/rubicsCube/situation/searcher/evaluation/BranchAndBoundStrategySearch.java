@@ -12,7 +12,7 @@ public class BranchAndBoundStrategySearch extends SearchInWidth {
     private CostCalculator costCalculator;
     
     private Map<Integer, List<State>> statesWithCost;
-    private HashSet<State> visitedStates;
+    private Map<State, Integer> statesWithStepsToReach;
     
     public BranchAndBoundStrategySearch(
         CostCalculator costCalculator) {
@@ -23,98 +23,94 @@ public class BranchAndBoundStrategySearch extends SearchInWidth {
         costCalculator = new CubeCostCalculator();
     }
     
-    //TODO сделать поиск
     @Override
     public boolean search(State currentState, int maxSteps) {
         
-        visitedStates = new HashSet<>();
         statesWithCost = new TreeMap<>();
+        statesWithStepsToReach = new HashMap<>();
         
         List<State> newStates = new ArrayList<>();
         newStates.add(currentState);
         searchTree.put(new byte[]{(byte) currentStep}, currentState);
         
-        visitedStates.add(currentState);
+        statesWithCost.put(0, newStates);
+        statesWithStepsToReach.put(currentState, 0);
         
-        while (!isFinished && currentStep < maxSteps) {
-            
-            newStates = generateNewStates(newStates);
-            
-            List<State> nextStates = null;
-            
-            //Map<Integer, List<State>> treeMap = new TreeMap<>();
+        boolean continueSearch = true;
+        
+        while (!isFinished && continueSearch) {
             
             for (List<State> states : statesWithCost.values()) {
                 
-                //todo разобраться с visitedStates
-                //states.removeAll(visitedStates);
-                
                 if (!states.isEmpty()) {
-                    nextStates = generateNewStates(states.get(0));
-                    //todo обрабатывать nextStates и statesWithCost
+                    generateNewStates(states.get(0), maxSteps);
                     break;
                 }
                 
             }
+            
+            for (List<State> states : statesWithCost.values()) {
+                continueSearch = !states.isEmpty();
+                if (continueSearch) {
+                    break;
+                }
+            }
+            
         }
         
         return isFinished;
     }
     
-    private List<State> generateNewStates(State oldState) {
-        currentStep++;
+    private void generateNewStates(State oldState, int maxSteps) {
+        currentStep = statesWithStepsToReach.get(oldState) + 1;
         
-        List<State> nextStates = generator.getAllNewPossibleStates(
-            oldState);
-        
-        for (State nextState : nextStates) {
-            int nextStateCost = findStateCost(oldState) +
-                                    costCalculator.getCost(oldState, nextState);
+        if (currentStep <= maxSteps) {
             
-        /*    for (int i = 0; i < statesWithCost.values().size(); i++) {
-                List<State> someStates =
-                    ((List<List<State>>) statesWithCost.values()).get(i);
+            List<State> nextStates = generator.getAllNewPossibleStates(
+                oldState);
+            
+            for (State nextState : nextStates) {
+                statesWithStepsToReach.put(nextState, currentStep);
                 
-                if (nextStateCost == 0 && someStates.contains(oldState)) {
-                    nextStateCost =
-                        ((List<Integer>) statesWithCost.keySet()).get(i) +
-                            costCalculator.getCost(oldState, nextState);
+                int nextStateCost = findStateCost(oldState) +
+                                        costCalculator
+                                            .getCost(oldState, nextState);
+                
+                int stateLastCost = findStateCost(nextState);
+                
+                if (stateLastCost > nextStateCost) {
+                    statesWithCost.get(stateLastCost).remove(nextState);
                 }
                 
-            }*/
-            
-            int stateLastCost = findStateCost(nextState);
-            
-            if (stateLastCost > nextStateCost) {
-                statesWithCost.get(stateLastCost).remove(nextState);
+                if (statesWithCost.containsKey(nextStateCost)) {
+                    statesWithCost.get(nextStateCost).add(nextState);
+                } else {
+                    List<State> newStateList = new ArrayList<>();
+                    newStateList.add(nextState);
+                    statesWithCost.put(nextStateCost, newStateList);
+                }
+                
             }
             
-            if (statesWithCost.containsKey(nextStateCost)) {
-                statesWithCost.put(nextStateCost,
-                    Arrays.asList(nextState));
-            } else {
-                statesWithCost.get(nextStateCost).add(nextState);
-            }
+            fillTree(searchTree, oldState, nextStates);
+            
+            checkStates(nextStates);
             
         }
-        
-        fillTree(searchTree, oldState, nextStates);
-        
-        checkStates(nextStates);
-        visitedStates.addAll(nextStates);
-        
-        return nextStates;
+        for (List<State> states : statesWithCost.values()) {
+            states.remove(oldState);
+        }
     }
     
     private int findStateCost(State state) {
         int cost = -1;
+        Iterator<Map.Entry<Integer, List<State>>> iter =
+            statesWithCost.entrySet().iterator();
         
-        for (int i = 0; i < statesWithCost.values().size() && cost == -1; i++) {
-            List<State> someStates =
-                ((List<List<State>>) statesWithCost.values()).get(i);
-            
-            if (someStates.contains(state)) {
-                cost = ((List<Integer>) statesWithCost.keySet()).get(i);
+        while (iter.hasNext() && cost == -1) {
+            Map.Entry<Integer, List<State>> entrySet = iter.next();
+            if (entrySet.getValue().contains(state)) {
+                cost = entrySet.getKey();
             }
             
         }
