@@ -37,11 +37,9 @@ public class SearchInWidth extends AbstractSearch {
             allStates.addAll(nextStates);
         }
         
-        states = allStates;
+        checkStates(allStates);
         
-        checkStates(states);
-        
-        return states;
+        return allStates;
     }
     
 }

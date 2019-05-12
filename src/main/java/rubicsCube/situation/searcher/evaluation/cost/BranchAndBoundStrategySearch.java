@@ -1,26 +1,22 @@
-package rubicsCube.situation.searcher.evaluation;
+package rubicsCube.situation.searcher.evaluation.cost;
 
 import rubicsCube.situation.State;
-import rubicsCube.situation.searcher.SearchInWidth;
+import rubicsCube.situation.searcher.evaluation.cost.CostTypeSearch;
 import rubicsCube.utils.cost.CostCalculator;
 import rubicsCube.utils.cost.CubeCostCalculator;
 
 import java.util.*;
 
-public class BranchAndBoundStrategySearch extends SearchInWidth {
+public class BranchAndBoundStrategySearch extends CostTypeSearch {
     
-    private CostCalculator costCalculator;
-    
-    private Map<Integer, List<State>> statesWithCost;
     private Map<State, Integer> statesWithStepsToReach;
     
-    public BranchAndBoundStrategySearch(
-        CostCalculator costCalculator) {
-        this.costCalculator = costCalculator;
+    public BranchAndBoundStrategySearch(CostCalculator costCalculator) {
+        super(costCalculator);
     }
     
     public BranchAndBoundStrategySearch() {
-        costCalculator = new CubeCostCalculator();
+        super(new CubeCostCalculator());
     }
     
     @Override
@@ -73,8 +69,8 @@ public class BranchAndBoundStrategySearch extends SearchInWidth {
                 statesWithStepsToReach.put(nextState, currentStep);
                 
                 int nextStateCost = findStateCost(oldState) +
-                                        costCalculator
-                                            .getCost(oldState, nextState);
+                                        costCalculator.getCost(oldState,
+                                            nextState);
                 
                 int stateLastCost = findStateCost(nextState);
                 
@@ -100,22 +96,6 @@ public class BranchAndBoundStrategySearch extends SearchInWidth {
         for (List<State> states : statesWithCost.values()) {
             states.remove(oldState);
         }
-    }
-    
-    private int findStateCost(State state) {
-        int cost = -1;
-        Iterator<Map.Entry<Integer, List<State>>> iter =
-            statesWithCost.entrySet().iterator();
-        
-        while (iter.hasNext() && cost == -1) {
-            Map.Entry<Integer, List<State>> entrySet = iter.next();
-            if (entrySet.getValue().contains(state)) {
-                cost = entrySet.getKey();
-            }
-            
-        }
-        
-        return cost;
     }
     
 }
