@@ -1,24 +1,24 @@
 package rubicsCube.cube.side;
 
-import rubicsCube.cube.color.Color;
+import rubicsCube.cube.element.Element;
 
 import java.util.Arrays;
 
 public class ClassicSide implements Side {
 
-    private Color[][] colors;
+    private Element[][] colors;
 
-    public ClassicSide(Color[][] colors) {
+    public ClassicSide(Element[][] colors) {
         this.colors = colors;
     }
 
-    public static ClassicSide getOneColorSide(Color color) {
+    public static ClassicSide getOneColorSide(Element color) {
         return new ClassicSide(
-                new Color[][]{{color, color, color}, {color, color, color},
+                new Element[][]{{color, color, color}, {color, color, color},
                         {color, color, color}});
     }
 
-    public Color[][] getColors() {
+    public Element[][] getColors() {
         return colors;
     }
 

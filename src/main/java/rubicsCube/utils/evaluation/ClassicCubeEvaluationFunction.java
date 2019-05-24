@@ -1,6 +1,6 @@
 package rubicsCube.utils.evaluation;
 
-import rubicsCube.cube.color.Color;
+import rubicsCube.cube.element.Element;
 import rubicsCube.cube.side.ClassicSide;
 import rubicsCube.cube.side.Side;
 import rubicsCube.situation.ClassicCubeState;
@@ -28,8 +28,8 @@ public class ClassicCubeEvaluationFunction implements EvaluationFunction {
             Side side = ((ClassicCubeState) state).getSides().get(i);
             Side goalSide = ((ClassicCubeState) goalState).getSides().get(i);
             for (int j = 0; j < ((ClassicSide) side).getColors().length; j++) {
-                Color[] row = ((ClassicSide) side).getColors()[j];
-                Color[] goalRow = ((ClassicSide) goalSide).getColors()[j];
+                Element[] row = ((ClassicSide) side).getColors()[j];
+                Element[] goalRow = ((ClassicSide) goalSide).getColors()[j];
                 for (int k = 0; k < row.length;
                      k++) {
                     if (row[k].equals(goalRow[k])) {

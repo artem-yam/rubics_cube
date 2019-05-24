@@ -2,7 +2,7 @@ package rubicsCube.situation.generator;
 
 import rubicsCube.action.Action;
 import rubicsCube.action.Rotation;
-import rubicsCube.cube.color.Color;
+import rubicsCube.cube.element.Element;
 import rubicsCube.cube.side.ClassicSide;
 import rubicsCube.cube.side.Side;
 import rubicsCube.situation.ClassicCubeState;
@@ -35,32 +35,32 @@ public class CubeStatesGenerator implements StatesGenerator {
             newState = getStateClone(currentState);
             newState.setLastAction(action);
             
-            Color[][] upSideColors =
+            Element[][] upSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(0))
                     .getColors();
-            Color[][] downSideColors =
+            Element[][] downSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(1))
                     .getColors();
-            Color[][] frontSideColors =
+            Element[][] frontSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(2))
                     .getColors();
-            Color[][] rightSideColors =
+            Element[][] rightSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(3))
                     .getColors();
-            Color[][] backSideColors =
+            Element[][] backSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(4))
                     .getColors();
-            Color[][] leftSideColors =
+            Element[][] leftSideColors =
                 ((ClassicSide) ((ClassicCubeState) newState).getSides().get(5))
                     .getColors();
             
             Side sideAfterRotation;
-            Color[][] rotatingSideEdgeColors;
+            Element[][] rotatingSideEdgeColors;
             
             switch ((Rotation) action) {
                 case RIGHT:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {rightSideColors[2][0], rightSideColors[1][0],
                             rightSideColors[0][0]},
                         {rightSideColors[2][1], rightSideColors[1][1],
@@ -68,7 +68,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {rightSideColors[2][2], rightSideColors[1][2],
                             rightSideColors[0][2]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[0][2], upSideColors[1][2],
                             upSideColors[2][2]},
                         {frontSideColors[0][2], frontSideColors[1][2],
@@ -100,7 +100,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case CON_RIGHT:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {rightSideColors[0][2], rightSideColors[1][2],
                             rightSideColors[2][2]},
                         {rightSideColors[0][1], rightSideColors[1][1],
@@ -108,7 +108,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {rightSideColors[0][0], rightSideColors[1][0],
                             rightSideColors[2][0]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[0][2], upSideColors[1][2],
                             upSideColors[2][2]},
                         {frontSideColors[0][2], frontSideColors[1][2],
@@ -140,7 +140,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case LEFT:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {leftSideColors[2][0], leftSideColors[1][0],
                             leftSideColors[0][0]},
                         {leftSideColors[2][1], leftSideColors[1][1],
@@ -148,7 +148,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {leftSideColors[2][2], leftSideColors[1][2],
                             leftSideColors[0][2]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[0][0], upSideColors[1][0],
                             upSideColors[2][0]},
                         {frontSideColors[0][0], frontSideColors[1][0],
@@ -180,7 +180,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case CON_LEFT:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {leftSideColors[0][2], leftSideColors[1][2],
                             leftSideColors[2][2]},
                         {leftSideColors[0][1], leftSideColors[1][1],
@@ -188,7 +188,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {leftSideColors[0][0], leftSideColors[1][0],
                             leftSideColors[2][0]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[0][0], upSideColors[1][0],
                             upSideColors[2][0]},
                         {frontSideColors[0][0], frontSideColors[1][0],
@@ -220,7 +220,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case UP:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {upSideColors[2][0], upSideColors[1][0],
                             upSideColors[0][0]},
                         {upSideColors[2][1], upSideColors[1][1],
@@ -228,7 +228,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {upSideColors[2][2], upSideColors[1][2],
                             upSideColors[0][2]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {frontSideColors[0][0], frontSideColors[0][1],
                             frontSideColors[0][2]},
                         {rightSideColors[0][0], rightSideColors[0][1],
@@ -260,7 +260,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case CON_UP:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {upSideColors[0][2], upSideColors[1][2],
                             upSideColors[2][2]},
                         {upSideColors[0][1], upSideColors[1][1],
@@ -268,7 +268,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {upSideColors[0][0], upSideColors[1][0],
                             upSideColors[2][0]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {frontSideColors[0][0], frontSideColors[0][1],
                             frontSideColors[0][2]},
                         {rightSideColors[0][0], rightSideColors[0][1],
@@ -300,7 +300,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case DOWN:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {downSideColors[2][0], downSideColors[1][0],
                             downSideColors[0][0]},
                         {downSideColors[2][1], downSideColors[1][1],
@@ -308,7 +308,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {downSideColors[2][2], downSideColors[1][2],
                             downSideColors[0][2]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {frontSideColors[2][0], frontSideColors[2][1],
                             frontSideColors[2][2]},
                         {rightSideColors[2][0], rightSideColors[2][1],
@@ -339,7 +339,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     
                     break;
                 case CON_DOWN:
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {downSideColors[0][2], downSideColors[1][2],
                             downSideColors[2][2]},
                         {downSideColors[0][1], downSideColors[1][1],
@@ -347,7 +347,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {downSideColors[0][0], downSideColors[1][0],
                             downSideColors[2][0]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {frontSideColors[2][0], frontSideColors[2][1],
                             frontSideColors[2][2]},
                         {rightSideColors[2][0], rightSideColors[2][1],
@@ -379,7 +379,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     break;
                 case FRONT:
                     
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {frontSideColors[2][0], frontSideColors[1][0],
                             frontSideColors[0][0]},
                         {frontSideColors[2][1], frontSideColors[1][1],
@@ -387,7 +387,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {frontSideColors[2][2], frontSideColors[1][2],
                             frontSideColors[0][2]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[2][0], upSideColors[2][1],
                             upSideColors[2][2]},
                         {rightSideColors[0][0], rightSideColors[1][0],
@@ -418,7 +418,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     
                     break;
                 case CON_FRONT:
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {frontSideColors[0][2], frontSideColors[1][2],
                             frontSideColors[2][2]},
                         {frontSideColors[0][1], frontSideColors[1][1],
@@ -426,7 +426,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {frontSideColors[0][0], frontSideColors[1][0],
                             frontSideColors[2][0]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[2][0], upSideColors[2][1],
                             upSideColors[2][2]},
                         {rightSideColors[0][0], rightSideColors[1][0],
@@ -457,7 +457,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     
                     break;
                 case BACK:
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {backSideColors[2][0], backSideColors[1][0],
                             backSideColors[0][0]},
                         {backSideColors[2][1], backSideColors[1][1],
@@ -465,7 +465,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {backSideColors[2][2], backSideColors[1][2],
                             backSideColors[0][2]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[0][0], upSideColors[0][1],
                             upSideColors[0][2]},
                         {rightSideColors[0][2], rightSideColors[1][2],
@@ -496,7 +496,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                     
                     break;
                 case CON_BACK:
-                    sideAfterRotation = new ClassicSide(new Color[][]{
+                    sideAfterRotation = new ClassicSide(new Element[][]{
                         {backSideColors[0][2], backSideColors[1][2],
                             backSideColors[2][2]},
                         {backSideColors[0][1], backSideColors[1][1],
@@ -504,7 +504,7 @@ public class CubeStatesGenerator implements StatesGenerator {
                         {backSideColors[0][0], backSideColors[1][0],
                             backSideColors[2][0]}});
                     
-                    rotatingSideEdgeColors = new Color[][]{
+                    rotatingSideEdgeColors = new Element[][]{
                         {upSideColors[0][0], upSideColors[0][1],
                             upSideColors[0][2]},
                         {rightSideColors[0][2], rightSideColors[1][2],

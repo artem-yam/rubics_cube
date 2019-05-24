@@ -1,6 +1,6 @@
-package rubicsCube.cube.color;
+package rubicsCube.cube.element;
 
-public enum StandardColor implements Color {
+public enum StandardColor implements Element {
 
     YELLOW("Y"), WHITE("W"), RED("R"), GREEN("G"), ORANGE("O"), BLUE("B");
 

@@ -1,8 +1,8 @@
 package rubicsCube.situation;
 
 import rubicsCube.action.Action;
-import rubicsCube.cube.color.Color;
-import rubicsCube.cube.color.StandardColor;
+import rubicsCube.cube.element.Element;
+import rubicsCube.cube.element.StandardColor;
 import rubicsCube.cube.side.ClassicSide;
 import rubicsCube.cube.side.Side;
 
@@ -77,7 +77,7 @@ public class ClassicCubeState implements State {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         
-        Color[] tempColors;
+        Element[] tempColors;
         
         String formatString = "%3s";
         
@@ -90,7 +90,7 @@ public class ClassicCubeState implements State {
                 sb.append(String.format(formatString, " "));
             }
             sb.append(String.format(formatString, "|"));
-            for (Color color : tempColors) {
+            for (Element color : tempColors) {
                 sb.append(String.format(formatString,
                     ((StandardColor) color).getStringForOutput()));
             }
@@ -105,21 +105,21 @@ public class ClassicCubeState implements State {
             j++) {
             
             tempColors = ((ClassicSide) sides.get(5)).getColors()[j];
-            for (Color color : tempColors) {
+            for (Element color : tempColors) {
                 sb.append(String.format(formatString,
                     ((StandardColor) color).getStringForOutput()));
             }
             sb.append(String.format(formatString, "|"));
             
             tempColors = ((ClassicSide) sides.get(2)).getColors()[j];
-            for (Color color : tempColors) {
+            for (Element color : tempColors) {
                 sb.append(String.format(formatString,
                     ((StandardColor) color).getStringForOutput()));
             }
             sb.append(String.format(formatString, "|"));
             
             tempColors = ((ClassicSide) sides.get(3)).getColors()[j];
-            for (Color color : tempColors) {
+            for (Element color : tempColors) {
                 sb.append(String.format(formatString,
                     ((StandardColor) color).getStringForOutput()));
                 
@@ -127,7 +127,7 @@ public class ClassicCubeState implements State {
             sb.append(String.format(formatString, "|"));
             
             tempColors = ((ClassicSide) sides.get(4)).getColors()[j];
-            for (Color color : tempColors) {
+            for (Element color : tempColors) {
                 sb.append(String.format(formatString,
                     ((StandardColor) color).getStringForOutput()));
             }
@@ -144,7 +144,7 @@ public class ClassicCubeState implements State {
                 sb.append(String.format(formatString, " "));
             }
             sb.append(String.format(formatString, "|"));
-            for (Color color : tempColors) {
+            for (Element color : tempColors) {
                 sb.append(String.format(formatString,
                     ((StandardColor) color).getStringForOutput()));
             }
